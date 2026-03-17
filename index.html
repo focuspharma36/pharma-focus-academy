@@ -10,7 +10,7 @@ body{
 font-family: 'Segoe UI', sans-serif;
 margin:0;
 background: linear-gradient(to right, #eef2f3, #ffffff);
-animation: fadeIn 1.5s ease-in;
+animation: fadeIn 1.2s ease-in;
 }
 
 @keyframes fadeIn {
@@ -36,16 +36,27 @@ color:white;
 margin:15px;
 text-decoration:none;
 font-weight:bold;
-transition:0.3s;
 }
 
-nav a:hover{
-color:#90e0ef;
+.hero{
+text-align:center;
+padding:50px 20px;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.hero p{
+font-size:18px;
+color:#444;
+max-width:700px;
+margin:auto;
 }
 
 .container{
 padding:40px;
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 }
 
@@ -62,6 +73,13 @@ transition:0.3s;
 transform:translateY(-5px);
 }
 
+.lesson{
+margin:10px 0;
+padding:10px;
+background:#f1f5f9;
+border-radius:6px;
+}
+
 button{
 background:#1e4d6b;
 color:white;
@@ -69,6 +87,7 @@ border:none;
 padding:10px 18px;
 border-radius:6px;
 cursor:pointer;
+margin-top:10px;
 }
 
 button:hover{
@@ -83,23 +102,16 @@ padding:20px;
 margin-top:40px;
 }
 
-.hero{
-text-align:center;
-padding:40px;
-}
-
-.hero h1{
-font-size:36px;
-}
-
-.hero p{
-font-size:18px;
-color:#444;
-}
-
 iframe{
 border-radius:10px;
 margin-top:10px;
+}
+
+.quiz{
+background:#fff3cd;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
 }
 
 </style>
@@ -109,58 +121,103 @@ margin-top:10px;
 
 <header>
 <h1>Pharma Focus Academy</h1>
-<p>Empowering Pharmacy Students | Free Learning Platform</p>
+<p>Pharmacy Education | Pharmacovigilance | Regulatory Affairs | Careers in Pharmacy</p>
 </header>
 
 <nav>
 <a href="#courses">Courses</a>
+<a href="#quiz">Quiz</a>
 <a href="#certificate">Certificate</a>
 <a href="#contact">Contact</a>
 </nav>
 
 <div class="hero">
-<h1>Learn Smarter, Grow Faster</h1>
-<p>Free pharmacy education for Pharmacovigilance, PEBC & beyond</p>
+<h1>Learn Pharmacy the Smart Way</h1>
+<p>
+A free platform focused on Pharmacovigilance, Regulatory Affairs,
+and career development in pharmacy. Learn through structured lessons,
+videos, and practical insights.
+</p>
 </div>
 
 <div class="container">
 
-<h2 id="courses">📚 Free Courses</h2>
+<h2 id="courses">📚 Courses</h2>
 
 <div class="card">
-<h3>Introduction to Pharmacovigilance</h3>
-<p>Understand ADRs, drug safety, and reporting systems.</p>
+<h3>Pharmacovigilance Course</h3>
 
+<div class="lesson">Lesson 1: Introduction to PV</div>
 <iframe width="100%" height="315"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+src="https://www.youtube.com/embed?listType=user_uploads&list=PharmaFocus36"
 allowfullscreen></iframe>
 
+<div class="lesson">Lesson 2: ADR Classification</div>
+<div class="lesson">Lesson 3: Case Processing</div>
+
 </div>
 
 <div class="card">
-<h3>PEBC Preparation Basics</h3>
-<p>Important topics and strategy for PEBC exam success.</p>
+<h3>Regulatory Affairs Basics</h3>
+<div class="lesson">Lesson 1: Regulatory Overview</div>
+<div class="lesson">Lesson 2: FDA & EMA Basics</div>
 </div>
 
 <div class="card">
-<h3>Drug Safety Fundamentals</h3>
-<p>Global drug safety systems and case processing.</p>
+<h3>Careers in Pharmacy</h3>
+<div class="lesson">Resume Building</div>
+<div class="lesson">Interview Preparation</div>
 </div>
 
 <hr>
 
-<h2 id="certificate">🎓 Get Your Certificate</h2>
+<h2 id="quiz">📝 Quick Quiz</h2>
 
-<p>Click below to download your course completion certificate.</p>
+<div class="quiz">
+<p><b>What is Pharmacovigilance?</b></p>
 
-<button onclick="downloadCertificate()">Download Certificate</button>
+<input type="radio" name="q1"> Drug manufacturing<br>
+<input type="radio" name="q1" id="correct"> Drug safety monitoring<br>
+<input type="radio" name="q1"> Marketing<br><br>
+
+<button onclick="checkQuiz()">Submit Answer</button>
+
+<p id="result"></p>
+
+</div>
+
+<hr>
+
+<h2 id="certificate">🎓 Download Certificate</h2>
+
+<button onclick="generatePDF()">Download Certificate (PDF)</button>
+
+<hr>
+
+<h2>📊 Track Your Progress</h2>
+
+<button onclick="window.open('https://forms.gle/')">
+Submit Course Completion (Google Form)
+</button>
+
+<hr>
+
+<h2>🔐 Student Login</h2>
+
+<input type="text" placeholder="Enter your name" id="username">
+<button onclick="login()">Login</button>
+<p id="welcome"></p>
 
 <hr>
 
 <h2 id="contact">📩 Contact</h2>
 
 <p>Email: focuspharma1@gmail.com</p>
-<p>YouTube: Pharma Focus 36</p>
+<p>YouTube Channel:
+<a href="https://www.youtube.com/@PharmaFocus36" target="_blank">
+Pharma Focus 36
+</a>
+</p>
 
 </div>
 
@@ -170,31 +227,47 @@ allowfullscreen></iframe>
 
 <script>
 
-function downloadCertificate() {
+// Quiz
+function checkQuiz(){
+if(document.getElementById("correct").checked){
+document.getElementById("result").innerText="Correct!";
+}else{
+document.getElementById("result").innerText="Try Again!";
+}
+}
 
-let name = prompt("Enter your name for certificate:");
+// Login
+function login(){
+let name = document.getElementById("username").value;
+document.getElementById("welcome").innerText = "Welcome " + name + "!";
+}
+
+// PDF Certificate
+function generatePDF(){
+
+let name = prompt("Enter your name:");
 
 if(name){
 
-let content = `
-Pharma Focus Academy
+let win = window.open('', '', 'height=700,width=700');
 
-Certificate of Completion
+win.document.write(`
+<h1 style="text-align:center;">Pharma Focus Academy</h1>
+<h2 style="text-align:center;">Certificate of Completion</h2>
 
-This certifies that
+<p style="text-align:center;">This certifies that</p>
 
-${name}
+<h2 style="text-align:center;">${name}</h2>
 
-has successfully completed a course.
+<p style="text-align:center;">
+has successfully completed a course in Pharmacovigilance /
+Regulatory Affairs / Pharmacy Careers.
+</p>
 
-`;
+<p style="text-align:center;">Date: ${new Date().toLocaleDateString()}</p>
+`);
 
-let blob = new Blob([content], { type: "text/plain" });
-
-let link = document.createElement("a");
-link.href = URL.createObjectURL(blob);
-link.download = "Certificate.txt";
-link.click();
+win.print();
 
 }
 }
