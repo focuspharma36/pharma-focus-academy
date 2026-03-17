@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pharmacovigilance Course</title>
+
+<style>
+
+body{
+font-family: 'Segoe UI', sans-serif;
+margin:0;
+background:#f4f6f8;
+animation:fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+header{
+background:#1e4d6b;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.lesson{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+iframe{
+width:100%;
+height:250px;
+border-radius:10px;
+}
+
+.quiz{
+background:white;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+button{
+background:#1e4d6b;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#2c7da0;
+}
+
+.result{
+font-weight:bold;
+margin-top:10px;
+}
+
+@media(max-width:600px){
+iframe{height:200px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Pharmacovigilance Course</h1>
+<p>Pharma Focus Academy</p>
+</header>
+
+<div class="container">
+
+<h2>📺 Lessons</h2>
+
+<div class="lesson">
+<h3>Lesson 1: Introduction</h3>
+<iframe src="https://www.youtube.com/embed?listType=user_uploads&list=PharmaFocus36"></iframe>
+</div>
+
+<div class="lesson"><h3>Lesson 2: ADR Classification</h3></div>
+<div class="lesson"><h3>Lesson 3: Case Processing</h3></div>
+<div class="lesson"><h3>Lesson 4: Signal Detection</h3></div>
+
+<hr>
+
+<h2>📝 Final Quiz</h2>
+
+<div class="quiz" id="quiz"></div>
+
+<button onclick="submitQuiz()">Submit Quiz</button>
+
+<p class="result" id="result"></p>
+
+<button onclick="generateCertificate()">Download Certificate</button>
+
+</div>
+
+<script>
+
+// Questions
+const questions = [
+{
+q:"Pharmacovigilance deals with?",
+options:["Marketing","Drug Safety","Sales","Manufacturing"],
+answer:1
+},
+{
+q:"ADR stands for?",
+options:["Adverse Drug Reaction","Annual Drug Report","Active Dose Response","None"],
+answer:0
+},
+{
+q:"Who monitors drug safety globally?",
+options:["WHO","NASA","UNICEF","IMF"],
+answer:0
+},
+{
+q:"Signal detection means?",
+options:["Finding safety issues","Selling drugs","Manufacturing","None"],
+answer:0
+},
+{
+q:"Case processing involves?",
+options:["Handling safety reports","Packaging","Marketing","None"],
+answer:0
+},
+{
+q:"PV is important for?",
+options:["Patient safety","Profit","Marketing","None"],
+answer:0
+},
+{
+q:"ICSR stands for?",
+options:["Individual Case Safety Report","Internal Case Study","None","All"],
+answer:0
+},
+{
+q:"Regulatory bodies include?",
+options:["FDA","EMA","Both","None"],
+answer:2
+},
+{
+q:"Drug safety is monitored after?",
+options:["Approval","Manufacturing","Testing","None"],
+answer:0
+},
+{
+q:"Pharmacovigilance improves?",
+options:["Safety","Quality","Both","None"],
+answer:2
+}
+];
+
+let quizHTML = "";
+
+questions.forEach((q,i)=>{
+quizHTML += `<p><b>${i+1}. ${q.q}</b></p>`;
+q.options.forEach((opt,j)=>{
+quizHTML += `<input type="radio" name="q${i}" value="${j}"> ${opt}<br>`;
+});
+});
+
+document.getElementById("quiz").innerHTML = quizHTML;
+
+// Submit quiz
+function submitQuiz(){
+let score = 0;
+
+questions.forEach((q,i)=>{
+let selected = document.querySelector(`input[name=q${i}]:checked`);
+if(selected && parseInt(selected.value) === q.answer){
+score++;
+}
+});
+
+document.getElementById("result").innerText =
+"Your Score: " + score + " / " + questions.length;
+}
+
+// Certificate
+function generateCertificate(){
+
+let name = prompt("Enter your name:");
+
+if(name){
+
+let win = window.open('', '', 'height=700,width=900');
+
+win.document.write(`
+<div style="text-align:center; padding:40px; font-family:Arial; border:10px solid #1e4d6b;">
+
+<h1 style="color:#1e4d6b;">Pharma Focus Academy</h1>
+
+<h2>Certificate of Completion</h2>
+
+<p>This is to certify that</p>
+
+<h1>${name}</h1>
+
+<p>has successfully completed the</p>
+
+<h3>Pharmacovigilance Course</h3>
+
+<p>Date: ${new Date().toLocaleDateString()}</p>
+
+</div>
+`);
+
+win.print();
+
+}
+}
+
+</script>
+
+</body>
+</html>
