@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pharma Focus Academy</title>
+
+<style>
+
+body{
+font-family: 'Segoe UI', sans-serif;
+margin:0;
+background: linear-gradient(to right, #eef2f3, #ffffff);
+animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+from {opacity:0;}
+to {opacity:1;}
+}
+
+header{
+background: linear-gradient(135deg,#1e4d6b,#2c7da0);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+nav{
+background:#0d2d44;
+padding:12px;
+text-align:center;
+}
+
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#90e0ef;
+}
+
+.container{
+padding:40px;
+max-width:1000px;
+margin:auto;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:25px;
+border-radius:12px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+button{
+background:#1e4d6b;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2c7da0;
+}
+
+footer{
+background:#1e4d6b;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+.hero{
+text-align:center;
+padding:40px;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+.hero p{
+font-size:18px;
+color:#444;
+}
+
+iframe{
+border-radius:10px;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Pharma Focus Academy</h1>
+<p>Empowering Pharmacy Students | Free Learning Platform</p>
+</header>
+
+<nav>
+<a href="#courses">Courses</a>
+<a href="#certificate">Certificate</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="hero">
+<h1>Learn Smarter, Grow Faster</h1>
+<p>Free pharmacy education for Pharmacovigilance, PEBC & beyond</p>
+</div>
+
+<div class="container">
+
+<h2 id="courses">📚 Free Courses</h2>
+
+<div class="card">
+<h3>Introduction to Pharmacovigilance</h3>
+<p>Understand ADRs, drug safety, and reporting systems.</p>
+
+<iframe width="100%" height="315"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen></iframe>
+
+</div>
+
+<div class="card">
+<h3>PEBC Preparation Basics</h3>
+<p>Important topics and strategy for PEBC exam success.</p>
+</div>
+
+<div class="card">
+<h3>Drug Safety Fundamentals</h3>
+<p>Global drug safety systems and case processing.</p>
+</div>
+
+<hr>
+
+<h2 id="certificate">🎓 Get Your Certificate</h2>
+
+<p>Click below to download your course completion certificate.</p>
+
+<button onclick="downloadCertificate()">Download Certificate</button>
+
+<hr>
+
+<h2 id="contact">📩 Contact</h2>
+
+<p>Email: focuspharma1@gmail.com</p>
+<p>YouTube: Pharma Focus 36</p>
+
+</div>
+
+<footer>
+<p>© 2026 Pharma Focus Academy</p>
+</footer>
+
+<script>
+
+function downloadCertificate() {
+
+let name = prompt("Enter your name for certificate:");
+
+if(name){
+
+let content = `
+Pharma Focus Academy
+
+Certificate of Completion
+
+This certifies that
+
+${name}
+
+has successfully completed a course.
+
+`;
+
+let blob = new Blob([content], { type: "text/plain" });
+
+let link = document.createElement("a");
+link.href = URL.createObjectURL(blob);
+link.download = "Certificate.txt";
+link.click();
+
+}
+}
+
+</script>
+
+</body>
+</html>
